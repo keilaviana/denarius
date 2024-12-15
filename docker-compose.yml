@@ -1,6 +1,19 @@
 version: '3.8'
 
 services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=mysql+pymysql://root:example@db:3306/appdb
+    depends_on:
+      - db
+
   frontend:
     build:
       context: ./frontend
